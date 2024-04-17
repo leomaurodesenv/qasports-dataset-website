@@ -1,9 +1,22 @@
 import streamlit as st
-from transformers import pipeline
+from datasets import load_dataset
+from haystack import Document
+from haystack.components.readers import ExtractiveReader
 
-pipe = pipeline("sentiment-analysis")
-text = st.text_area("Enter some text")
+# Load the dataset
+dataset = load_dataset("PedroCJardim/QASports", "basketball", split="validation")
 
-if text:
-    result = pipe(text)
-    st.json(result)
+# Load the model
+reader = ExtractiveReader(model="laurafcamargos/distilbert-qasports-basket-small")
+reader.warm_up()
+
+# Running using the Reader
+docs = [
+    Document(content="Paris is the capital of France."),
+    Document(content="Berlin is the capital of Germany.")
+]
+
+query = "What is the capital of France?"
+answer = reader.run(query="What is the capital of France?", documents=docs, top_k=1)
+
+st.json(answer)

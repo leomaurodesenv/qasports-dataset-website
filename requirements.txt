@@ -1,2 +1,9 @@
-torch
-transformers
+# main
+# streamlit # commented to avoid miss instalation
+
+# HuggingFace
+datasets==2.18.0
+# Question Answering
+haystack-ai==2.0.1
+accelerate==0.29.2
+sentence-transformers==2.7.0
