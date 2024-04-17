@@ -1,8 +1,8 @@
 ---
 title: Qasports Website
 emoji: 👁
-colorFrom: pink
-colorTo: indigo
+colorFrom: blue
+colorTo: green
 sdk: streamlit
 sdk_version: 1.33.0
 app_file: app.py
