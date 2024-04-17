@@ -7,3 +7,5 @@ datasets==2.18.0
 haystack-ai==2.0.1
 accelerate==0.29.2
 sentence-transformers==2.7.0
+# Extra
+mmh3==4.1.0
