@@ -15,7 +15,7 @@ tags:
   - question-answering
   - open-domain-qa
   - extractive-qa
-short_description:
+short_description: "QASports the first large sports-themed QA dataset"
 models:
   - laurafcamargos/distilbert-qasports-basket-small
 datasets:
