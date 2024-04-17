@@ -1,5 +1,5 @@
 ---
-title: QASports Website: Basketball
+title: QASports Website - Basketball
 emoji: 👁
 colorFrom: purple
 colorTo: green
