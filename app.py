@@ -69,15 +69,28 @@ def get_question_pipeline(_doc_store):
     return pipe
 
 
-# # Create the retriever and reader
-# retriever = InMemoryBM25Retriever(document_store=document_store())
-# reader = ExtractiveReader(model="laurafcamargos/distilbert-qasports-basket-small")
-# reader.warm_up()
-# # Create the pipeline
-# pipe = Pipeline()
-# pipe.add_component(instance=retriever, name="retriever")
-# pipe.add_component(instance=reader, name="reader")
-# pipe.connect("retriever.documents", "reader.documents")
+def search(pipeline, question: str):
+    """
+    Search for the answer to a question in the documents.
+
+    Args:
+    - pipeline: instance of the pipeline.
+    - question: string with the question.
+
+    Returns:
+    - answer: dictionary with the answer.
+    """
+    # Get the answers
+    top_k = 3
+    answer = pipeline.run(
+        data={
+            "retriever": {"query": question, "top_k": 10},
+            "reader": {"query": question, "top_k": top_k},
+        }
+    )
+    max_k = min(top_k, len(answer["reader"]["answers"]))
+    return answer["reader"]["answers"][0:max_k]
+
 
 # Streamlit interface
 with st.status(
@@ -102,16 +115,14 @@ if user_query := st.text_input(
     label="What do you want to know about Basketball?",
     placeholder="How many field goals did Kobe Bryant score?",
 ):
-    try:
-        top_k = 3
-        answer = pipe.run(
-            data={
-                "retriever": {"query": user_query, "top_k": 10},
-                "reader": {"query": user_query, "top_k": top_k},
-            }
-        )
-        # Display only the top k answers
-        max_k = len(answer["reader"]["answers"])
-        st.json(answer["reader"]["answers"][0 : min(top_k, max_k)])
-    except Exception as e:
-        st.error(f"Error: We do not have an answer for your question.")
+    # Get the answers
+    with st.spinner("Waiting"):
+        try:
+            answer = search(pipe, user_query)
+            st.json(answer)
+        except Exception as e:
+            st.error("We do not have an answer for your question")
+    # Show balloons only once
+    if not st.session_state.get("run_once", False):
+        st.balloons()
+        st.session_state["run_once"] = True
