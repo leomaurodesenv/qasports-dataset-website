@@ -59,7 +59,7 @@ def get_question_pipeline(_doc_store):
     st.caption(f"Building the Question Answering pipeline")
     # Create the retriever and reader
     retriever = InMemoryBM25Retriever(document_store=_doc_store)
-    reader = ExtractiveReader(model="laurafcamargos/distilbert-qasports-basket-small")
+    reader = ExtractiveReader(model="deepset/roberta-base-squad2")
     reader.warm_up()
     # Create the pipeline
     pipe = Pipeline()
@@ -112,7 +112,7 @@ st.caption(
 )
 
 if user_query := st.text_input(
-    label="What do you want to know about Basketball?",
+    label="Ask a question about Basketball! 🏀",
     placeholder="How many field goals did Kobe Bryant score?",
 ):
     # Get the answers

@@ -17,7 +17,7 @@ tags:
   - extractive-qa
 short_description: "QASports the first large sports-themed QA dataset"
 models:
-  - laurafcamargos/distilbert-qasports-basket-small
+  - deepset/roberta-base-squad2
 datasets:
   - PedroCJardim/QASports
 ---
@@ -26,7 +26,10 @@ Check out the configuration reference at https://huggingface.co/docs/hub/spaces-
 
 # Website
 
-This website presents a collection of documents from the dataset named "QASports", the first large sports question answering dataset for open questions. QASports contains real data of players, teams and matches from the sports soccer, basketball and American football. It counts over 1.5 million questions and answers about 54k preprocessed, cleaned and organized documents from Wikipedia-like sources.
+This website presents a collection of documents from the dataset named "QASports", the first large sports question answering dataset for open questions. QASports contains real data of players, teams and matches from the sports soccer, basketball and American football.
+
+- 💻 Website: https://huggingface.co/spaces/leomaurodesenv/qasports-website
+- 🔧 Scripts: https://github.com/leomaurodesenv/qasports-dataset-website
 
 > **Note**. As first version, we are only focusing in Basketball data.
 
