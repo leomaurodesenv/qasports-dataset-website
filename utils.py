@@ -24,7 +24,6 @@ def get_unique_docs(dataset, unique_docs: set):
                     "context_id": doc["context_id"],
                     "url": doc["url"],
                     "source": "QASports",
-                    "category": "basketball",
                 },
             )
             docs.append(document)

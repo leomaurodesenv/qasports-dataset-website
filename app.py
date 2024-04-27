@@ -30,7 +30,7 @@ def load_documents():
     return documents
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def get_document_store(documents):
     """
     Index the files in the document store.
@@ -45,7 +45,7 @@ def get_document_store(documents):
     return document_store
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_resource(show_spinner=False)
 def get_question_pipeline(_doc_store):
     """
     Create the pipeline with the retriever and reader components.
@@ -119,10 +119,16 @@ if user_query := st.text_input(
     with st.spinner("Waiting"):
         try:
             answer = search(pipe, user_query)
-            st.json(answer)
+            for idx, ans in enumerate(answer):
+                st.info(
+                    f"""
+                    Answer {idx+1}: "{ans.data}" | Score: {ans.score:0.4f}  
+                    Document: "{ans.document.meta["title"]}"  
+                    URL: {ans.document.meta["url"]}
+                """
+                )
+                with st.expander("See details", expanded=False):
+                    st.write(ans)
+                st.divider()
         except Exception as e:
             st.error("We do not have an answer for your question")
-    # Show balloons only once
-    if not st.session_state.get("run_once", False):
-        st.balloons()
-        st.session_state["run_once"] = True
