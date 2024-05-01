@@ -93,6 +93,11 @@ def search(pipeline, question: str):
 
 
 # Streamlit interface
+_, centering_column, _ = st.columns(3)
+with centering_column:
+    st.image("assets/qasports-logo.png", use_column_width=True)
+
+# Loading status
 with st.status(
     "Downloading dataset...", expanded=st.session_state.get("expanded", True)
 ) as status:
@@ -106,7 +111,7 @@ with st.status(
     )
     st.session_state["expanded"] = False
 
-st.subheader("🔎 QASports: Basketball", divider="rainbow")
+st.subheader("🔎 Basketball", divider="rainbow")
 st.caption(
     """This website presents a collection of documents from the dataset named "QASports", the first large sports question answering dataset for open questions. QASports contains real data of players, teams and matches from the sports soccer, basketball and American football. It counts over 1.5 million questions and answers about 54k preprocessed, cleaned and organized documents from Wikipedia-like sources."""
 )
