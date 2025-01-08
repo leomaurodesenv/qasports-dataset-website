@@ -2,7 +2,8 @@
 # streamlit # commented to avoid miss instalation
 
 # HuggingFace
-datasets==2.18.0
+datasets==3.2.0
+huggingface_hub==0.27.0
 # Question Answering
 haystack-ai==2.0.1
 accelerate==0.29.2

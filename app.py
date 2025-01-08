@@ -22,7 +22,7 @@ def load_documents():
     dataset_split = "basketball"
     st.caption(f'Fetching "{dataset_name}" dataset')
     # build the dataset
-    dataset = load_dataset(dataset_name, dataset_split)
+    dataset = load_dataset(dataset_name, name=dataset_split)
     docs_validation = get_unique_docs(dataset["validation"], unique_docs)
     docs_train = get_unique_docs(dataset["train"], unique_docs)
     docs_test = get_unique_docs(dataset["test"], unique_docs)
