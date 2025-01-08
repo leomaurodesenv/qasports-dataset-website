@@ -5,7 +5,7 @@ colorFrom: purple
 colorTo: green
 sdk: streamlit
 sdk_version: 1.33.0
-python_version: 3.10
+python_version: 3.9
 suggested_hardware: t4-small
 app_file: app.py
 pinned: false
